@@ -1,8 +1,8 @@
 import sqlite3
 
 connection = sqlite3.connect("applications.db")
-conn = sqlite3.connect("applications.db")
-cursor = conn.cursor()
+cursor = connection.cursor()
+
 
 
 cursor.execute('''
@@ -16,6 +16,5 @@ CREATE TABLE IF NOT EXISTS applications (
 )
 ''')
 
-conn.commit()
-conn.close()
+connection.commit()
 connection.close()
