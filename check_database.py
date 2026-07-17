@@ -2,7 +2,7 @@
 
 import sqlite3
 
-
+#Used this file to check if the database was working
 connection = sqlite3.connect("applications.db")
 cursor = connection.cursor()
 
