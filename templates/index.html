@@ -26,11 +26,7 @@
     <button type="submit">Add Application</button>
 </form>
 
-<form action="/delete" method="post">
-    <label for="delete_app">Application ID</label>
-    <input type="text" id="delete_app" name="delete_app" required>
-    <button type="delete_application">Delete Application</button>
-</form>
+
 <ul>
     {% for item in status_counts %}
         <li>{{ item[0] }}: {{ item[1] }}</li>
@@ -39,6 +35,9 @@
 
 <ol>
     {% for app in applications %}
-        <li>{{ app[1] }} - {{ app[2] }} ({{ app[3] }}) Date Applied: {{ app[4] }} Job Link: <a href="{{ app[5] }}" target="_blank">View Job</a></li>
+        <li>{{ app[1] }} ({{ app[2] }}) Date Applied: {{ app[3] }} Job Link: <a href="{{ app[4] }}" target="_blank">View Job</a>
+        <form action="/delete" method="post">
+        <button type="submit" name="delete_app" value="{{ app[0] }}">Delete</button>
+        </form></li>
     {% endfor %}
 </ol>
