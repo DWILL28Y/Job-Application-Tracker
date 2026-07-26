@@ -16,10 +16,15 @@ def home():
         status = request.form.get("status")
         date_applied = request.form.get("date_applied")
         job_link = request.form.get("job_link")        
-        
+
+
+
         app_query = "INSERT INTO applications (company, position, status, date_applied, job_link) VALUES (?, ?, ?, ?, ?)"
         cursor.execute(app_query, (company, position, status, date_applied, job_link))
 
+    total_query = "SELECT status, COUNT(*) FROM applications GROUP BY status"
+    cursor.execute(total_query)
+    status_counts = cursor.fetchall()
 
     cursor.execute("SELECT * FROM applications")
     rows = cursor.fetchall()
@@ -30,7 +35,7 @@ def home():
     connection.commit()
     connection.close()
 
-    return render_template("index.html", applications=rows)
+    return render_template("index.html", applications=rows, status_counts=status_counts)
 
 @app.route("/delete", methods=["GET", "POST"])
 def delete():
@@ -41,6 +46,10 @@ def delete():
 
         delete_query = "DELETE FROM applications WHERE id = (?)"
         cursor.execute(delete_query, (app_id,))
+
+    total_query = "SELECT status, COUNT(*) FROM applications GROUP BY status"
+    cursor.execute(total_query)
+    status_counts = cursor.fetchall()
     
     cursor.execute("SELECT * FROM applications")
     rows = cursor.fetchall()
@@ -49,4 +58,4 @@ def delete():
 
     connection.commit()
     connection.close()
-    return render_template("index.html", applications=rows)
+    return render_template("index.html", applications=rows, status_counts=status_counts)

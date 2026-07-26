@@ -31,6 +31,11 @@
     <input type="text" id="delete_app" name="delete_app" required>
     <button type="delete_application">Delete Application</button>
 </form>
+<ul>
+    {% for item in status_counts %}
+        <li>{{ item[0] }}: {{ item[1] }}</li>
+    {% endfor %}
+</ul>
 
 <ol>
     {% for app in applications %}
