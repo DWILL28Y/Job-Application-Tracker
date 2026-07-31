@@ -72,7 +72,7 @@
             <h2>Application Totals</h2>
             <ul class="app_total_list">
                 {% for item in status_counts %}
-                    <li>{{ item[0] }}: {{ item[1] }}</li>
+                    <li class="badge text-bg-primary py-2">{{ item[0] }}: {{ item[1] }}</li>
                 {% endfor %}
             </ul>
         </section>
